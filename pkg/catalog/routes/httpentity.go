@@ -2,6 +2,7 @@ package routes
 
 import (
 	"errors"
+	"go-message_queue_system/domain/entity"
 )
 
 type CreateProductReq struct {
@@ -12,9 +13,19 @@ type CreateProductReq struct {
 	Price       int      `json:"price"`
 }
 
-func (req CreateProductReq) Validate() error {
+func (req CreateProductReq) validate() error {
 	if req.UserId == 0 || len(req.Name) == 0 || req.Price == 0 {
 		return errors.New("mandatory details missing")
 	}
 	return nil
+}
+
+func (req CreateProductReq) toProductDto() entity.Product {
+	return entity.Product{
+		UserId:      req.UserId,
+		Name:        req.Name,
+		Description: req.Description,
+		Images:      req.Images,
+		Price:       req.Price,
+	}
 }

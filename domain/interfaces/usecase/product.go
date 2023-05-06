@@ -6,5 +6,5 @@ import (
 )
 
 type IProductUCase interface {
-	CreateProduct(ctx context.Context, product entity.Product) (int, error)
+	UpsertProduct(ctx context.Context, product entity.Product) error
 }

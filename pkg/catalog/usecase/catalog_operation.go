@@ -17,6 +17,6 @@ func NewProductUCase(productRepo repository.IProductRepo) usecase.IProductUCase 
 	}
 }
 
-func (puc ProductUCase) CreateProduct(ctx context.Context, product entity.Product) (int, error) {
-	return 0, nil
+func (puc ProductUCase) UpsertProduct(ctx context.Context, product entity.Product) error {
+	return nil
 }

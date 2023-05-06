@@ -6,5 +6,5 @@ import (
 )
 
 type IProductRepo interface {
-	Create(ctx context.Context, product entity.Product) (int, error)
+	Upsert(ctx context.Context, product entity.Product) (int, error)
 }

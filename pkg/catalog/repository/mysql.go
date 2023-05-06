@@ -17,6 +17,6 @@ func NewProductRepository(db *sql.DB) repository.IProductRepo {
 	}
 }
 
-func (pr ProductRepo) Create(ctx context.Context, product entity.Product) (int, error) {
+func (pr ProductRepo) Upsert(ctx context.Context, product entity.Product) (int, error) {
 	return 0, nil
 }
