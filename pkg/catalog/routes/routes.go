@@ -36,6 +36,7 @@ func upsertProduct(c *gin.Context) {
 		log.Printf("Error: %v\n. unable_to_upsert_product\n\n", err.Error())
 		resData["message"] = "unable to upsert product"
 		c.JSON(http.StatusOK, resData)
+		return
 	}
 	resData["status"] = true
 	resData["message"] = "successfully upserted product"
