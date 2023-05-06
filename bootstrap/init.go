@@ -1,12 +1,12 @@
 package bootstrap
 
 import (
-	"database/sql"
+	"go-message_queue_system/db"
 	"go-message_queue_system/domain/interfaces/repository"
 	"go-message_queue_system/domain/interfaces/usecase"
 	_productRepo "go-message_queue_system/pkg/catalog/repository"
-	_productUCase "go-message_queue_system/pkg/catalog/usecase"
 	_productRoutes "go-message_queue_system/pkg/catalog/routes"
+	_productUCase "go-message_queue_system/pkg/catalog/usecase"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,7 +17,7 @@ var (
 )
 
 func initRepos() {
-	productRepo = _productRepo.NewProductRepository(&sql.DB{})
+	productRepo = _productRepo.NewProductRepository(db.Client)
 }
 
 func initUCase() {

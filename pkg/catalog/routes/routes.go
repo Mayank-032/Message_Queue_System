@@ -24,7 +24,7 @@ func upsertProduct(c *gin.Context) {
 		err = request.validate()
 	}
 	if err != nil {
-		log.Printf("Error: %v, invalid_request", err.Error())
+		log.Printf("Error: %v\n, invalid_request\n\n", err.Error())
 		resData["message"] = "invalid request"
 		c.JSON(http.StatusBadRequest, resData)
 		return
@@ -33,7 +33,8 @@ func upsertProduct(c *gin.Context) {
 	product := request.toProductDto()
 	err = ProductUCase.UpsertProduct(c, product)
 	if err != nil {
-		resData["message"] = "unable to create product"
+		log.Printf("Error: %v\n. unable_to_upsert_product\n\n", err.Error())
+		resData["message"] = "unable to upsert product"
 		c.JSON(http.StatusOK, resData)
 	}
 	resData["status"] = true
