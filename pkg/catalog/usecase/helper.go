@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"go-message_queue_system/rabbitmq"
 	"go-message_queue_system/rabbitmq/publisher"
 	"log"
 
@@ -12,6 +13,16 @@ import (
 
 func publishProductIdToQueue(ctx context.Context, conn *amqp.Connection, productId int) error {
 	defer conn.Close()
+	if conn.IsClosed() {
+		log.Printf("Closed Connect")
+		
+		err := rabbitmq.Connect()
+		if err != nil {
+			log.Printf("Error: %v, unable to init rabbitmq", err.Error())
+			return errors.New("unable to init rabbitmq conn")
+		}
+		conn = rabbitmq.Conn
+	}
 	amqpChannel, err := conn.Channel()
 	if err != nil {
 		log.Printf("Error: %v,\n failed_to_create_channel", err.Error())

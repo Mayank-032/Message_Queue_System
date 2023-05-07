@@ -87,7 +87,7 @@ func (pr ProductRepo) Save(ctx context.Context, productId int, imagesArr []strin
 	}
 	defer conn.Close()
 
-	sqlQuery := "UPDATE product SET json_column = JSON_SET(json_column, '$.key1', ?) WHERE product_id = ?"
+	sqlQuery := "UPDATE product SET compressed_product_images = ? WHERE product_id = ?"
 	
 	productImageBytes, err := json.Marshal(imagesArr)
 	if err != nil {
