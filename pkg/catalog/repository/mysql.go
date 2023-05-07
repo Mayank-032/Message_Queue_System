@@ -52,3 +52,11 @@ func (pr ProductRepo) Upsert(ctx context.Context, product entity.Product) (int, 
 	}
 	return int(lastInsertedId), nil
 }
+
+func (pr ProductRepo) Get(ctx context.Context, productId int) (entity.Product, error) {
+	return entity.Product{}, nil
+}
+
+func (pr ProductRepo) Save(ctx context.Context, imagesArr []string) error {
+	return nil
+}

@@ -1,0 +1,58 @@
+package controller
+
+import (
+	"context"
+	"encoding/json"
+	"go-message_queue_system/domain/interfaces/controller"
+	"go-message_queue_system/domain/interfaces/repository"
+	"log"
+
+	"github.com/streadway/amqp"
+)
+
+type ProductController struct {
+	ProductRepo repository.IProductRepo
+}
+
+func NewProductController(productRepo repository.IProductRepo) controller.IProductController {
+	return ProductController {
+		ProductRepo: productRepo,
+	}
+}
+
+func (pc ProductController) ProcessProductImages(ctx context.Context, data interface{}, msg amqp.Delivery) {
+	productIdBytes, err := json.Marshal(data)
+	if err != nil {
+		log.Printf("Error: %v,\n failed_to_marshal_request_body\n\n", err.Error())
+		msg.Ack(false)
+		return
+	}
+
+	var productId int
+	err = json.Unmarshal(productIdBytes, &productId)
+	if err != nil {
+		log.Printf("Error: %v,\n failed_to_unmarshal_productIdBytes\n\n", err.Error())
+		msg.Ack(false)
+		return
+	}
+
+	product, err := pc.ProductRepo.Get(ctx, productId)
+	if err != nil {
+		log.Printf("Error: %v,\n failed_to_fetch_product", err.Error())
+		msg.Ack(false)
+		return
+	}
+
+	localImagesPathArr, err := downloadAndSaveImage(ctx, product.Images)
+	if err != nil {
+		log.Printf("Error: %v,\n failed_to_download_and_save_image", err.Error())
+		msg.Ack(false)
+		return
+	}
+
+	err = pc.ProductRepo.Save(ctx, localImagesPathArr)
+	if err != nil {
+		log.Printf("Error: %v,\n failed_to_save_images_local_path", err.Error())
+		msg.Ack(false)
+	}
+}

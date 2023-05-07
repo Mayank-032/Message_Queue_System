@@ -7,16 +7,20 @@ import (
 	"go-message_queue_system/domain/interfaces/repository"
 	"go-message_queue_system/domain/interfaces/usecase"
 	"log"
+
+	"github.com/streadway/amqp"
 )
 
 type ProductUCase struct {
-	UserUCase usecase.IUserUCase
+	Conn     amqp.Connection
+	UserUCase   usecase.IUserUCase
 	ProductRepo repository.IProductRepo
 }
 
-func NewProductUCase(userUCase usecase.IUserUCase, productRepo repository.IProductRepo) usecase.IProductUCase {
-	return ProductUCase {
-		UserUCase: userUCase,
+func NewProductUCase(conn amqp.Connection, userUCase usecase.IUserUCase, productRepo repository.IProductRepo) usecase.IProductUCase {
+	return ProductUCase{
+		Conn:     conn,
+		UserUCase:   userUCase,
 		ProductRepo: productRepo,
 	}
 }
@@ -33,10 +37,10 @@ func (puc ProductUCase) UpsertProduct(ctx context.Context, product entity.Produc
 		log.Printf("Error: %v\n, unable_to_upsert_product_in_database\n\n", err.Error())
 		return errors.New("unable to upsert product")
 	}
-	err = publishProductIdToQueue(ctx, productId)
+	err = publishProductIdToQueue(ctx, puc.Conn, productId)
 	if err != nil {
 		log.Printf("Error: %v\n, unable_to_publish_data_to_queue\n\n", err.Error())
 		return errors.New("unable to publish to queue")
-	}
+	}	
 	return nil
 }
