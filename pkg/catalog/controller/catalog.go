@@ -10,12 +10,16 @@ import (
 	"github.com/streadway/amqp"
 )
 
+var (
+	downloadAndSaveImage = DownloadAndSaveImage
+)
+
 type ProductController struct {
 	ProductRepo repository.IProductRepo
 }
 
 func NewProductController(productRepo repository.IProductRepo) controller.IProductController {
-	return ProductController {
+	return ProductController{
 		ProductRepo: productRepo,
 	}
 }

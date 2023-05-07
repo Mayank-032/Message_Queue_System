@@ -18,14 +18,14 @@ type PublishTaskRequest struct {
 }
 
 type PublishTaskRequestData struct {
-	Data          interface{}   `json:"data"`
+	Data interface{} `json:"data"`
 }
 
 func (req PublishTaskRequest) PublishMessage(ctx context.Context, amqpChannel *amqp.Channel) error {
 	reqBytes := req.ReqBytes
 	exchangeName := req.ExchangeName
 	routingKey := req.RoutingKey
-	
+
 	if exchangeName == domain.EmptyString {
 		log.Println("exchange_name_missing")
 		return errors.New("exchange name missing")

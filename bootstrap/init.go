@@ -12,8 +12,8 @@ import (
 	_productUCase "go-message_queue_system/pkg/catalog/usecase"
 	_userRepo "go-message_queue_system/pkg/user/repository"
 	_userUCase "go-message_queue_system/pkg/user/usecase"
-	_consumer "go-message_queue_system/rabbitmq/consumer"
 	"go-message_queue_system/rabbitmq"
+	_consumer "go-message_queue_system/rabbitmq/consumer"
 
 	"github.com/gin-gonic/gin"
 )

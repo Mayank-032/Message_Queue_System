@@ -3,11 +3,11 @@ package repository
 import (
 	"context"
 	"database/sql"
+	"encoding/json"
 	"errors"
 	"go-message_queue_system/domain/entity"
 	"go-message_queue_system/domain/interfaces/repository"
 	"log"
-	"encoding/json"
 )
 
 type ProductRepo struct {
@@ -28,9 +28,9 @@ func (pr ProductRepo) Upsert(ctx context.Context, product entity.Product) (int, 
 	}
 	defer conn.Close()
 
-	sqlQuery := "INSERT INTO product(product_name, product_description, product_price, product_images)" + 
-	" VALUES(?, ?, ?, ?) ON DUPLICATE KEY UPDATE" + 
-	" product_description=values(product_description), product_price=values(product_price), product_images=values(product_images)"
+	sqlQuery := "INSERT INTO product(product_name, product_description, product_price, product_images)" +
+		" VALUES(?, ?, ?, ?) ON DUPLICATE KEY UPDATE" +
+		" product_description=values(product_description), product_price=values(product_price), product_images=values(product_images)"
 
 	productImageBytes, err := json.Marshal(product.Images)
 	if err != nil {
@@ -61,7 +61,7 @@ func (pr ProductRepo) Get(ctx context.Context, productId int) ([]string, error) 
 	}
 	defer conn.Close()
 
-	var jsonString string	
+	var jsonString string
 	sqlQuery := "SELECT JSON_EXTRACT(product_images, '$') AS prod_img_array FROM product WHERE product_id = ?"
 	args := []interface{}{productId}
 	err = conn.QueryRowContext(ctx, sqlQuery, args...).Scan(&jsonString)
@@ -88,7 +88,7 @@ func (pr ProductRepo) Save(ctx context.Context, productId int, imagesArr []strin
 	defer conn.Close()
 
 	sqlQuery := "UPDATE product SET compressed_product_images = ? WHERE product_id = ?"
-	
+
 	productImageBytes, err := json.Marshal(imagesArr)
 	if err != nil {
 		log.Printf("Error: %v\n, unable_to_marshal_array_to_json\n\n", err.Error())

@@ -13,7 +13,7 @@ type UserRepo struct {
 }
 
 func NewUserRepository(db *sql.DB) repository.IUserRepo {
-	return UserRepo {
+	return UserRepo{
 		DB: db,
 	}
 }

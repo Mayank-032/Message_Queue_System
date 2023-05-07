@@ -10,9 +10,13 @@ import (
 	"path/filepath"
 )
 
-func downloadAndSaveImage(ctx context.Context, imagesArr []string) ([]string, error) {
+var (
+	createFile = CreateFile
+)
+
+func DownloadAndSaveImage(ctx context.Context, imagesArr []string) ([]string, error) {
 	localImagesPathArr := make([]string, 0)
-	
+
 	outputDir := "./images"
 	err := os.MkdirAll(outputDir, 0755)
 	if err != nil {
@@ -34,7 +38,7 @@ func downloadAndSaveImage(ctx context.Context, imagesArr []string) ([]string, er
 	return localImagesPathArr, nil
 }
 
-func createFile(originalUrl, outputPath string) error {
+func CreateFile(originalUrl, outputPath string) error {
 	file, err := os.Create(outputPath)
 	if err != nil {
 		return err

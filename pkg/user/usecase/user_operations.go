@@ -13,7 +13,7 @@ type UserUCase struct {
 }
 
 func NewUserUCase(userRepo repository.IUserRepo) usecase.IUserUCase {
-	return UserUCase {
+	return UserUCase{
 		UserRepo: userRepo,
 	}
 }

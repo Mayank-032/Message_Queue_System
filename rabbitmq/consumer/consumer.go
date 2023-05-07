@@ -19,13 +19,13 @@ type ConsumerLayer struct {
 }
 
 func NewConsumerLayer(productController controller.IProductController) interfaces.IConsumer {
-	return ConsumerLayer {
+	return ConsumerLayer{
 		ProductController: productController,
 	}
 }
 
 func (cl ConsumerLayer) StartConsumers() {
-	consumers := []entity.Consumer {
+	consumers := []entity.Consumer{
 		{
 			QueueName:    "store_product_images",
 			ExchangeName: "store_product",

@@ -11,6 +11,10 @@ import (
 	"github.com/streadway/amqp"
 )
 
+var (
+	publishProductIdToQueue = PublishProductIdToQueue
+)
+
 type ProductUCase struct {
 	Conn        *amqp.Connection
 	UserUCase   usecase.IUserUCase

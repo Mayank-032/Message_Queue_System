@@ -11,11 +11,11 @@ import (
 	"github.com/streadway/amqp"
 )
 
-func publishProductIdToQueue(ctx context.Context, conn *amqp.Connection, productId int) error {
+func PublishProductIdToQueue(ctx context.Context, conn *amqp.Connection, productId int) error {
 	defer conn.Close()
 	if conn.IsClosed() {
 		log.Printf("Closed Connect")
-		
+
 		err := rabbitmq.Connect()
 		if err != nil {
 			log.Printf("Error: %v, unable to init rabbitmq", err.Error())

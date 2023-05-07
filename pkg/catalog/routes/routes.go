@@ -9,6 +9,7 @@ import (
 )
 
 var ProductUCase usecase.IProductUCase
+
 func InitRoutes(apiGroup *gin.RouterGroup, productUCase usecase.IProductUCase) {
 	ProductUCase = productUCase
 

@@ -1,9 +1,9 @@
 package db
 
 import (
-	"go-message_queue_system/domain"
 	"database/sql"
 	"fmt"
+	"go-message_queue_system/domain"
 	"log"
 	"time"
 
@@ -23,10 +23,10 @@ func Init(dbCred domain.DBCred) error {
 	db.SetConnMaxLifetime(time.Minute * 5)
 
 	pingErr := db.Ping()
-    if pingErr != nil {
-        log.Printf("Error: %v, unable to ping database", pingErr)
+	if pingErr != nil {
+		log.Printf("Error: %v, unable to ping database", pingErr)
 		return err
-    }
+	}
 	log.Printf("Connected to DB %s successfully\n", dbCred.DBName)
 	Client = db
 	return nil
