@@ -53,10 +53,53 @@ func (pr ProductRepo) Upsert(ctx context.Context, product entity.Product) (int, 
 	return int(lastInsertedId), nil
 }
 
-func (pr ProductRepo) Get(ctx context.Context, productId int) (entity.Product, error) {
-	return entity.Product{}, nil
+func (pr ProductRepo) Get(ctx context.Context, productId int) ([]string, error) {
+	conn, err := pr.DB.Conn(ctx)
+	if err != nil {
+		log.Printf("Error: %v\n, unable_to_db_connect\n\n", err.Error())
+		return nil, errors.New("unable to db connect")
+	}
+	defer conn.Close()
+
+	var jsonString string	
+	sqlQuery := "SELECT JSON_EXTRACT(product_images, '$') AS prod_img_array FROM product WHERE product_id = ?"
+	args := []interface{}{productId}
+	err = conn.QueryRowContext(ctx, sqlQuery, args...).Scan(&jsonString)
+	if err != nil {
+		log.Printf("Error: %v,\n failed_to_execute_query", err.Error())
+		return nil, errors.New("unable to execute query")
+	}
+
+	var productImages []string
+	err = json.Unmarshal([]byte(jsonString), &productImages)
+	if err != nil {
+		log.Printf("Error: %v,\n failed_to_unmarshal_data", err.Error())
+		return nil, errors.New("unable to unmarshal data")
+	}
+	return productImages, nil
 }
 
-func (pr ProductRepo) Save(ctx context.Context, imagesArr []string) error {
+func (pr ProductRepo) Save(ctx context.Context, productId int, imagesArr []string) error {
+	conn, err := pr.DB.Conn(ctx)
+	if err != nil {
+		log.Printf("Error: %v\n, unable_to_db_connect\n\n", err.Error())
+		return errors.New("unable to db connect")
+	}
+	defer conn.Close()
+
+	sqlQuery := "UPDATE product SET json_column = JSON_SET(json_column, '$.key1', ?) WHERE product_id = ?"
+	
+	productImageBytes, err := json.Marshal(imagesArr)
+	if err != nil {
+		log.Printf("Error: %v\n, unable_to_marshal_array_to_json\n\n", err.Error())
+		return errors.New("unable to marshal array to json")
+	}
+
+	args := []interface{}{productImageBytes, productId}
+	_, err = conn.ExecContext(ctx, sqlQuery, args...)
+	if err != nil {
+		log.Printf("Error: %v\n, failed_to_execute_sql_query\n\n", err.Error())
+		return errors.New("unable to execute sql query")
+	}
 	return nil
 }

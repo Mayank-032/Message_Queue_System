@@ -36,21 +36,21 @@ func (pc ProductController) ProcessProductImages(ctx context.Context, data inter
 		return
 	}
 
-	product, err := pc.ProductRepo.Get(ctx, productId)
+	productImagesArr, err := pc.ProductRepo.Get(ctx, productId)
 	if err != nil {
 		log.Printf("Error: %v,\n failed_to_fetch_product", err.Error())
 		msg.Ack(false)
 		return
 	}
 
-	localImagesPathArr, err := downloadAndSaveImage(ctx, product.Images)
+	localImagesPathArr, err := downloadAndSaveImage(ctx, productImagesArr)
 	if err != nil {
 		log.Printf("Error: %v,\n failed_to_download_and_save_image", err.Error())
 		msg.Ack(false)
 		return
 	}
 
-	err = pc.ProductRepo.Save(ctx, localImagesPathArr)
+	err = pc.ProductRepo.Save(ctx, productId, localImagesPathArr)
 	if err != nil {
 		log.Printf("Error: %v,\n failed_to_save_images_local_path", err.Error())
 		msg.Ack(false)
