@@ -10,7 +10,7 @@ import (
 	"github.com/streadway/amqp"
 )
 
-func publishProductIdToQueue(ctx context.Context, conn amqp.Connection, productId int) error {
+func publishProductIdToQueue(ctx context.Context, conn *amqp.Connection, productId int) error {
 	defer conn.Close()
 	amqpChannel, err := conn.Channel()
 	if err != nil {

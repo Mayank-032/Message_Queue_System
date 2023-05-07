@@ -42,7 +42,7 @@ func initConsumer() {
 
 func initUCase() {
 	userUCase = _userUCase.NewUserUCase(userRepo)
-	productUCase = _productUCase.NewProductUCase(*rabbitmq.Conn, userUCase, productRepo)
+	productUCase = _productUCase.NewProductUCase(rabbitmq.Conn, userUCase, productRepo)
 }
 
 func initAPIs(apiGroup *gin.RouterGroup) {

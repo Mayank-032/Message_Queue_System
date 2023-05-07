@@ -5,6 +5,7 @@ import (
 	"go-message_queue_system/bootstrap"
 	"go-message_queue_system/db"
 	"go-message_queue_system/domain"
+	"go-message_queue_system/rabbitmq"
 	"log"
 	"os"
 
@@ -25,8 +26,10 @@ func main() {
 		log.Printf("Error: %v, unable to connect to database", err.Error())
 		return
 	}
+
+	err = rabbitmq.Connect()
 	if err != nil {
-		log.Printf("Error: %v, unable to init DB", err.Error())
+		log.Printf("Error: %v, unable to init rabbitmq", err.Error())
 		return
 	}
 
