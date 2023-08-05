@@ -4,16 +4,6 @@ jobs:
     test:
         runs-on: ubuntu-latest
         if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags')
-        services:
-            mysql:
-                image: mysql:latest
-                env:
-                    MYSQL_ROOT_PASSWORD: ${{secrets.MYSQLDB_PASSWORD}}
-                    MYSQL_DATABASE: ${{secrets.MYSQLDB_DBNAME}}
-                    MYSQL_USER: ${{secrets.MYSQLDB_USERNAME}}
-                    MYSQL_PASSWORD: ${{secrets.MYSQLDB_PASSWORD}}
-            rabbitmq:
-                image: rabbitmq:latest
         steps:
             - uses: actions/checkout@v2
             - name: Run Unit Tests
