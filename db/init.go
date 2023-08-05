@@ -3,8 +3,8 @@ package db
 import (
 	"database/sql"
 	"fmt"
-	"go-message_queue_system/domain"
 	"log"
+	"message_queue_system/domain"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"

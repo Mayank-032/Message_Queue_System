@@ -2,7 +2,7 @@ package controller
 
 import (
 	"context"
-	mockProductRepo "go-message_queue_system/mocks/catalog/repository"
+	mockProductRepo "message_queue_system/mocks/catalog/repository"
 	"testing"
 
 	"github.com/streadway/amqp"

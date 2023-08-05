@@ -4,9 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"go-message_queue_system/rabbitmq"
-	"go-message_queue_system/rabbitmq/publisher"
 	"log"
+	"message_queue_system/rabbitmq"
+	"message_queue_system/rabbitmq/publisher"
 
 	"github.com/streadway/amqp"
 )

@@ -1,19 +1,19 @@
 package bootstrap
 
 import (
-	"go-message_queue_system/db"
-	"go-message_queue_system/domain/interfaces"
-	"go-message_queue_system/domain/interfaces/controller"
-	"go-message_queue_system/domain/interfaces/repository"
-	"go-message_queue_system/domain/interfaces/usecase"
-	_productController "go-message_queue_system/pkg/catalog/controller"
-	_productRepo "go-message_queue_system/pkg/catalog/repository"
-	_productRoutes "go-message_queue_system/pkg/catalog/routes"
-	_productUCase "go-message_queue_system/pkg/catalog/usecase"
-	_userRepo "go-message_queue_system/pkg/user/repository"
-	_userUCase "go-message_queue_system/pkg/user/usecase"
-	"go-message_queue_system/rabbitmq"
-	_consumer "go-message_queue_system/rabbitmq/consumer"
+	"message_queue_system/db"
+	"message_queue_system/domain/interfaces"
+	"message_queue_system/domain/interfaces/controller"
+	"message_queue_system/domain/interfaces/repository"
+	"message_queue_system/domain/interfaces/usecase"
+	_productController "message_queue_system/pkg/catalog/controller"
+	_productRepo "message_queue_system/pkg/catalog/repository"
+	_productRoutes "message_queue_system/pkg/catalog/routes"
+	_productUCase "message_queue_system/pkg/catalog/usecase"
+	_userRepo "message_queue_system/pkg/user/repository"
+	_userUCase "message_queue_system/pkg/user/usecase"
+	"message_queue_system/rabbitmq"
+	_consumer "message_queue_system/rabbitmq/consumer"
 
 	"github.com/gin-gonic/gin"
 )

@@ -3,9 +3,9 @@ package usecase
 import (
 	"context"
 	"errors"
-	"go-message_queue_system/domain/interfaces/repository"
-	"go-message_queue_system/domain/interfaces/usecase"
 	"log"
+	"message_queue_system/domain/interfaces/repository"
+	"message_queue_system/domain/interfaces/usecase"
 )
 
 type UserUCase struct {

@@ -3,12 +3,12 @@ package consumer
 import (
 	"context"
 	"encoding/json"
-	"go-message_queue_system/domain/entity"
-	"go-message_queue_system/domain/interfaces"
-	"go-message_queue_system/domain/interfaces/controller"
-	"go-message_queue_system/rabbitmq"
-	"go-message_queue_system/rabbitmq/publisher"
 	"log"
+	"message_queue_system/domain/entity"
+	"message_queue_system/domain/interfaces"
+	"message_queue_system/domain/interfaces/controller"
+	"message_queue_system/rabbitmq"
+	"message_queue_system/rabbitmq/publisher"
 	"os"
 
 	"github.com/streadway/amqp"

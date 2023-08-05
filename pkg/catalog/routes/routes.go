@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"go-message_queue_system/domain/interfaces/usecase"
 	"log"
+	"message_queue_system/domain/interfaces/usecase"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

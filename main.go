@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"go-message_queue_system/bootstrap"
-	"go-message_queue_system/db"
-	"go-message_queue_system/domain"
-	"go-message_queue_system/rabbitmq"
 	"log"
+	"message_queue_system/bootstrap"
+	"message_queue_system/db"
+	"message_queue_system/domain"
+	"message_queue_system/rabbitmq"
 	"os"
 
 	"github.com/gin-gonic/gin"

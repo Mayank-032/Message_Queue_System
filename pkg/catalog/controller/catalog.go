@@ -3,9 +3,9 @@ package controller
 import (
 	"context"
 	"encoding/json"
-	"go-message_queue_system/domain/interfaces/controller"
-	"go-message_queue_system/domain/interfaces/repository"
 	"log"
+	"message_queue_system/domain/interfaces/controller"
+	"message_queue_system/domain/interfaces/repository"
 
 	"github.com/streadway/amqp"
 )

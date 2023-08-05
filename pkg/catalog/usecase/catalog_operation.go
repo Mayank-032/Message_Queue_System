@@ -3,10 +3,10 @@ package usecase
 import (
 	"context"
 	"errors"
-	"go-message_queue_system/domain/entity"
-	"go-message_queue_system/domain/interfaces/repository"
-	"go-message_queue_system/domain/interfaces/usecase"
 	"log"
+	"message_queue_system/domain/entity"
+	"message_queue_system/domain/interfaces/repository"
+	"message_queue_system/domain/interfaces/usecase"
 
 	"github.com/streadway/amqp"
 )

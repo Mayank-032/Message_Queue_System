@@ -1,4 +1,4 @@
-module go-message_queue_system
+module message_queue_system
 
 go 1.20
 

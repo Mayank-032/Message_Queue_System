@@ -2,9 +2,9 @@ package usecase
 
 import (
 	"context"
-	"go-message_queue_system/domain/entity"
-	mockProductRepo "go-message_queue_system/mocks/catalog/repository"
-	mockUserUCase "go-message_queue_system/mocks/user/usecase"
+	"message_queue_system/domain/entity"
+	mockProductRepo "message_queue_system/mocks/catalog/repository"
+	mockUserUCase "message_queue_system/mocks/user/usecase"
 	"testing"
 
 	"github.com/streadway/amqp"

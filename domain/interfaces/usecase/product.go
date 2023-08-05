@@ -2,7 +2,7 @@ package usecase
 
 import (
 	"context"
-	"go-message_queue_system/domain/entity"
+	"message_queue_system/domain/entity"
 )
 
 type IProductUCase interface {

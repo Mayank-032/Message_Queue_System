@@ -5,9 +5,9 @@ import (
 	"database/sql"
 	"encoding/json"
 	"errors"
-	"go-message_queue_system/domain/entity"
-	"go-message_queue_system/domain/interfaces/repository"
 	"log"
+	"message_queue_system/domain/entity"
+	"message_queue_system/domain/interfaces/repository"
 )
 
 type ProductRepo struct {

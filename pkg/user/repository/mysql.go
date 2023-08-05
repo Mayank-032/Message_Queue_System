@@ -4,8 +4,8 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"go-message_queue_system/domain/interfaces/repository"
 	"log"
+	"message_queue_system/domain/interfaces/repository"
 )
 
 type UserRepo struct {

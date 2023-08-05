@@ -2,7 +2,7 @@ package routes
 
 import (
 	"errors"
-	"go-message_queue_system/domain/entity"
+	"message_queue_system/domain/entity"
 )
 
 type CreateProductReq struct {

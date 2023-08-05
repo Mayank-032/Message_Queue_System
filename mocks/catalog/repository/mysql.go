@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"go-message_queue_system/domain/entity"
+	"message_queue_system/domain/entity"
 
 	"github.com/stretchr/testify/mock"
 )

@@ -3,8 +3,8 @@ package publisher
 import (
 	"context"
 	"errors"
-	"go-message_queue_system/domain"
 	"log"
+	"message_queue_system/domain"
 
 	"github.com/streadway/amqp"
 )
