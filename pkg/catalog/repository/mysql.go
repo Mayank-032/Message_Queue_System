@@ -38,7 +38,7 @@ func (pr ProductRepo) Upsert(ctx context.Context, product entity.Product) (int, 
 		return 0, errors.New("unable to marshal array to json")
 	}
 
-	args := []interface{}{product.Name, product.Description, product.Price, productImageBytes}
+	args := []interface{}{product.Name, product.Description, product.Price, string(productImageBytes)}
 	result, err := conn.ExecContext(ctx, sqlQuery, args...)
 	if err != nil {
 		log.Printf("Error: %v\n, unable_to_execute_sql_query\n\n", err.Error())
@@ -95,7 +95,7 @@ func (pr ProductRepo) Save(ctx context.Context, productId int, imagesArr []strin
 		return errors.New("unable to marshal array to json")
 	}
 
-	args := []interface{}{productImageBytes, productId}
+	args := []interface{}{string(productImageBytes), productId}
 	_, err = conn.ExecContext(ctx, sqlQuery, args...)
 	if err != nil {
 		log.Printf("Error: %v\n, failed_to_execute_sql_query\n\n", err.Error())
