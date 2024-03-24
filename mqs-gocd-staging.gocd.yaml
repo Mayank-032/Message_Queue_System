@@ -7,7 +7,7 @@ pipelines:
     display_order: -1
     materials:
       test-gocd:
-        git: https://github.com/Mayank-032/Message_Queue_System/tree/main
+        git: https://github.com/Mayank-032/Message_Queue_System
         shallow_clone: false
         auto_update: true
         branch: main
