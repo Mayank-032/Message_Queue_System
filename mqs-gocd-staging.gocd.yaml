@@ -25,11 +25,8 @@ pipelines:
             tasks:
             - exec:
                 arguments:
-                - unit
                 - test
-                - cases
-                - in
-                - the
-                - repository
-                command: run
+                - -v
+                - ./...
+                command: go
                 run_if: passed
